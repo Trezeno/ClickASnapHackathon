@@ -13,6 +13,7 @@ header {
   text-decoration: bold;
 }
 
+/* Nav-Bar Section*/
 .nav-bar ul {
   list-style-type: none;
   margin-top: 0;
@@ -44,9 +45,4 @@ header {
 
 .nav-bar .active {
   background-color: rgb(50,50,50);
-}
-
-.image-shown .button {
-  color: red;
-  background-color: green;
 }
