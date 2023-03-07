@@ -48,6 +48,13 @@ header {
   background-color: rgb(50,50,50);
 }
 
+/* User Interests section */
+h3 {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
 /* Image on screen section */
 .image {
   color: white;
@@ -57,34 +64,26 @@ header {
   border: 1px white solid;
   width: 500px;
   height: 500px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-#next-image-button {
-  margin-left: 292px;
-}
-
-button#prev-image-button {
+/* Buttons */
+button {
   color: red;
   background-color: rgb(50,50,50);
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
   border: 1px white solid;
   padding: 8px;
-}
-
-button#prev-image-button:hover {
-  background-color: rgb(240,240,240);
 }
 
 button#next-image-button {
-  background-color: rgb(50,50,50);
-  color: red;
-  font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif;
-  border: 1px white solid;
-  padding: 8px;
+  margin-left: 263px;
 }
 
-button#next-image-button:hover {
+button:hover {
   background-color: rgb(240,240,240);
+  color: black;
+  cursor: pointer;
 }

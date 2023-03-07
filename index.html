@@ -20,24 +20,29 @@
     </ul>
   </div>
 
+  <div class="interests">
+    <h3 id="basic-tags">Basic list of photo tags: FOOTBALL, SPACE, FLOWERS, COMPUTERS, GAMING, ANIMALS, FASHION, CELEBRITIES, FOOD, SCENERY</h3>
+    <h3 id="interests">Current user interests: NONE</h3>
+    <button onclick="getUserInterests()" id="user-interests-button" type="button">ADD INTEREST</button>
+  </div>
+  
   <div class="showimage">
     <div class="image">
       <br>
-      <p id="image-number">IMAGE 1</p> <!-- IMAGE NUMBER -->
+      <p id="image-number">IMAGE NUMBER</p> <!-- IMAGE NUMBER -->
       <br>
-      <p id="image-tag">FOOTBALL</p> <!-- IMAGE TAG/TYPE -->
+      <p id="image-tag">IMAGE TAG</p> <!-- IMAGE TAG/TYPE -->
       <br>
-      <p id="sub-status">FREE</p> <!-- POSTER SUB STATUS -->
+      <p id="sub-status">UPLOADED BY<br>FREE OR PAID USER</p> <!-- POSTER SUB STATUS -->
     </div>
-    <br>
-    <button id="prev-image-button" type="button">Previous Image</button>
-    <button id="next-image-button" type="button">Next Image</button>
+    <button onclick="prevImage()" id="prev-image-button" type="button">PREVIOUS IMAGE</button>
+    <button onclick="nextImage()" id="next-image-button" type="button">NEXT IMAGE</button>
   </div>
 
   <!-- Scripts Below -->
-  <script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right"></script>
   <script src="script.js"></script>
   <!-- End Scripts -->
+  
 </body>
 
 </html>
