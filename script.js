@@ -10,17 +10,24 @@ function getUserInterests() {
   document.getElementById("interests").innerHTML = userInterestsStarter + userInterests.join(", ");
 }
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 
 //Functions for getting next and previous images
 function nextImage() {
   if (userInterests.length >= 1) { //This will be if user has custom interests
-      currentImageNumber += 1;
-      document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
-      console.log("CUSTOM INTERESTS SUCCESS, new number: " + currentImageNumber)
+    currentImageNumber += 1;
+    document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
+    let newImageTag = userInterests[getRandomInt(userInterests.length)];
+    document.getElementById("image-tag").innerHTML = newImageTag;
+    console.log("CUSTOM INTERESTS NEXT SUCCESS, new number: " + currentImageNumber + " new tag: " + newImageTag);
   } else { //This will be if no user interests have been selected
-      currentImageNumber += 1;
-      document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
-      console.log("NO INTERESTS SUCCESS, new number: " + currentImageNumber)
+    currentImageNumber += 1;
+    document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
+    let newImageTag = photoTagList[getRandomInt(photoTagList.length)];
+    document.getElementById("image-tag").innerHTML = newImageTag;
+    console.log("NO INTERESTS NEXT SUCCESS, new number: " + currentImageNumber + " new tag: " + newImageTag);
   }
 }
 
@@ -29,9 +36,18 @@ function prevImage() {
   if (currentImageNumber > 1) {
     currentImageNumber -= 1;
     document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
-    console.log("SUCCESS, new number: " +currentImageNumber)
+    console.log("PREV SUCCESS, new number: " + currentImageNumber)
   } else {
     console.log("FAIL, at image number 1")
+  }
+}
+
+//To store each seen image so when we click previous we will iterate over the last seen images, and next will go back until end of seen images where we will then start to find more new images of course
+class Image {
+  seenImage(number, tag, sub) {
+    this.number = number;
+    this.tag = tag;
+    this.sub = sub;
   }
 }
 
