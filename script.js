@@ -1,5 +1,15 @@
 let seenImagesNumbers = [];
 let currentImageNumber = 1;
+let photoTagList = ["FOOTBALL", "SPACE", "FLOWERS", "COMPUTERS", "GAMING", "ANIMALS", "FASHION", "CELEBRITIES", "FOOD", "SCENERY"]
+let userInterestsStarter = "Current user interests: ";
+let userInterests = [];
+
+function getUserInterests() {
+  userInterests.push(prompt("Enter one of your interests: ").toUpperCase());
+  console.log("Updated user interests: " + userInterests);
+  document.getElementById("interests").innerHTML = userInterestsStarter + userInterests.join(", ");
+  
+}
 
 function nextImage() {
   currentImageNumber += 1;
@@ -17,6 +27,5 @@ function prevImage() {
     console.log("FAIL, at image number 1")
   }
 }
-
 
 

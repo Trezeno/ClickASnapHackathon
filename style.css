@@ -48,6 +48,34 @@ header {
   background-color: rgb(50,50,50);
 }
 
+/* User Interests button and list */
+h3#basic-tags {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+h3#interests {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+button#user-interests-button {
+  color: red;
+  background-color: rgb(50,50,50);
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px white solid;
+  padding: 8px;
+}
+
+button#user-interests-button:hover {
+  background-color: rgb(240,240,240);
+  color: black;
+  cursor: pointer;
+}
+
 /* Image on screen section */
 .image {
   color: white;
@@ -57,12 +85,11 @@ header {
   border: 1px white solid;
   width: 500px;
   height: 500px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-#next-image-button {
-  margin-left: 292px;
-}
-
+/* Buttons below image */
 button#prev-image-button {
   color: red;
   background-color: rgb(50,50,50);
@@ -74,6 +101,8 @@ button#prev-image-button {
 
 button#prev-image-button:hover {
   background-color: rgb(240,240,240);
+  color: black;
+  cursor: pointer;
 }
 
 button#next-image-button {
@@ -83,8 +112,11 @@ button#next-image-button {
   font-family: Arial, Helvetica, sans-serif;
   border: 1px white solid;
   padding: 8px;
+  margin-left: 263px;
 }
 
 button#next-image-button:hover {
   background-color: rgb(240,240,240);
+  color: black;
+  cursor: pointer;
 }
