@@ -66,5 +66,3 @@ class Image {
     this.sub = sub;
   }
 }
-
-
