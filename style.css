@@ -4,6 +4,7 @@ html {
   background-color: darkgrey;
 }
 
+/* Webpage Header */
 header {
   color: white;
   padding: 3px;
@@ -45,4 +46,45 @@ header {
 
 .nav-bar .active {
   background-color: rgb(50,50,50);
+}
+
+/* Image on screen section */
+.image {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  background-color: rgb(50,50,50);
+  border: 1px white solid;
+  width: 500px;
+  height: 500px;
+}
+
+#next-image-button {
+  margin-left: 292px;
+}
+
+button#prev-image-button {
+  color: red;
+  background-color: rgb(50,50,50);
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px white solid;
+  padding: 8px;
+}
+
+button#prev-image-button:hover {
+  background-color: rgb(240,240,240);
+}
+
+button#next-image-button {
+  background-color: rgb(50,50,50);
+  color: red;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px white solid;
+  padding: 8px;
+}
+
+button#next-image-button:hover {
+  background-color: rgb(240,240,240);
 }

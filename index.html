@@ -13,18 +13,31 @@
 </header>
 
 <body>
-  <script src="script.js"></script>
   <div class="nav-bar">
     <ul>
       <li><a class="active" href="index.html">BROWSE</a></li>
-      <li><a href="trending.html">TRENDING</a></li>
+      <!-- <li><a href="trending.html">TRENDING</a></li> -->
     </ul>
   </div>
 
-  <div class="image-shown">
+  <div class="showimage">
+    <div class="image">
+      <br>
+      <p id="image-number">IMAGE 1</p> <!-- IMAGE NUMBER -->
+      <br>
+      <p id="image-tag">FOOTBALL</p> <!-- IMAGE TAG/TYPE -->
+      <br>
+      <p id="sub-status">FREE</p> <!-- POSTER SUB STATUS -->
+    </div>
+    <br>
+    <button id="prev-image-button" type="button">Previous Image</button>
     <button id="next-image-button" type="button">Next Image</button>
   </div>
+
+  <!-- Scripts Below -->
   <script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right"></script>
+  <script src="script.js"></script>
+  <!-- End Scripts -->
 </body>
 
 </html>
