@@ -48,7 +48,7 @@ header {
   background-color: rgb(50,50,50);
 }
 
-/* User Interests button and list */
+/* User Interests section */
 h3#basic-tags {
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
@@ -89,34 +89,16 @@ button#user-interests-button:hover {
   margin-bottom: 20px;
 }
 
-/* Buttons below image */
-button#prev-image-button {
+/* Buttons */
+button {
   color: red;
   background-color: rgb(50,50,50);
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
   border: 1px white solid;
   padding: 8px;
-}
-
-button#prev-image-button:hover {
-  background-color: rgb(240,240,240);
-  color: black;
-  cursor: pointer;
 }
 
 button#next-image-button {
-  background-color: rgb(50,50,50);
-  color: red;
-  font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif;
-  border: 1px white solid;
-  padding: 8px;
   margin-left: 263px;
-}
-
-button#next-image-button:hover {
-  background-color: rgb(240,240,240);
-  color: black;
-  cursor: pointer;
 }
