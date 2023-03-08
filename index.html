@@ -45,7 +45,21 @@
       <p id="sub-status">UPLOADED BY<br>FREE OR PAID USER</p> <!-- POSTER SUB STATUS -->
     </div>
     <button onclick="prevImage()" id="prev-image-button" type="button">PREVIOUS IMAGE</button>
+    <button onclick="addToLikedGallery()" id="like-image-button" type="button">LIKE</button>
     <button onclick="nextImage(checkFilterValueBrowse())" id="next-image-button" type="button">NEXT IMAGE</button>
+  </div>
+
+  <div class="galleryimage">
+    <div class="image-gallery">
+      <h2><u>YOUR GALLERY</u></h1>
+      <p id="image-number-gallery">GALLERY IMAGE NUMBER</p> <!-- IMAGE NUMBER -->
+      <br>
+      <p id="image-tag-gallery">GALLERY IMAGE TAG</p> <!-- IMAGE TAG/TYPE -->
+      <br>
+      <p id="sub-status-gallery">GALLERY UPLOADED BY<br>FREE OR PAID USER</p> <!-- POSTER SUB STATUS -->
+    </div>
+    <button onclick="galleryPrev()" id="prev-image-button" type="button">PREVIOUS IMAGE</button>
+    <button onclick="galleryNext()" id="next-image-button" type="button">NEXT IMAGE</button>
   </div>
 
   <!-- Scripts Below -->

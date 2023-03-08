@@ -5,6 +5,8 @@ let photoTagList = ["FOOTBALL", "SPACE", "FLOWERS", "COMPUTERS", "GAMING", "ANIM
 let userInterestsStarter = "Current user interests: ";
 let userInterests = [];
 let likedPhotoList = [];
+let galleryPhotos = [["GALLERY IMAGE NUMBER", "GALLERY IMAGE TAG", "GALLERY USER SUB STATUS"]];
+let galleryPhotoIndex = 0;
 
 //Function that gets and stores user interests
 function getUserInterests() {
@@ -194,4 +196,44 @@ function prevImageTrending() {
     document.getElementById("likes").innerHTML = "NUMBER OF LIKES: " + seenImagesListTrending[currentImageNumber][2];
     console.log("Going back to already cached photo: " + currentImageNumber);
   }
+}
+
+/* GALLERY BUTTONS */
+/* First number in array seach is index of image number
+ * Second number in array search is 0 / 1 / 2
+ * 0 == Image Number
+ * 1 == Image Tag
+ * 2 == User Sub Status
+ */
+
+function galleryNext() {
+  if (galleryPhotos.length > 1 && galleryPhotoIndex < galleryPhotos.length - 1) {
+    galleryPhotoIndex++;
+    document.getElementById("image-number-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][0];
+    document.getElementById("image-tag-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][1];
+    document.getElementById("sub-status-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][2];
+  } else {
+    alert("Either no images in gallery or at end of gallery.");
+  }
+}
+
+function galleryPrev() {
+  if (galleryPhotoIndex == 0) {
+    alert("Please click 'NEXT IMAGE' to get started.")
+  } else if (galleryPhotoIndex == 1) {
+    console.log("FAIL, at image number 1");
+  } else {
+    galleryPhotoIndex--;
+    document.getElementById("image-number-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][0];
+    document.getElementById("image-tag-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][1];
+    document.getElementById("sub-status-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][2];
+  }
+}
+
+/* Add photo to liked gallery function*/
+function addToLikedGallery() {
+  let currentNum = document.getElementById("image-number").innerHTML;
+  let currentTag = document.getElementById("image-tag").innerHTML;
+  let currentSub = document.getElementById("sub-status").innerHTML;
+  galleryPhotos.push([currentNum, currentTag, currentSub]);
 }
