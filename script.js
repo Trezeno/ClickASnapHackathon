@@ -212,6 +212,7 @@ function galleryNext() {
     document.getElementById("image-number-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][0];
     document.getElementById("image-tag-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][1];
     document.getElementById("sub-status-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][2];
+    console.log("GALLERY NEXT SUCCESS");
   } else {
     alert("Either no images in gallery or at end of gallery.");
   }
@@ -227,13 +228,18 @@ function galleryPrev() {
     document.getElementById("image-number-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][0];
     document.getElementById("image-tag-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][1];
     document.getElementById("sub-status-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][2];
+    console.log("GALLERY PREV SUCCESS");
   }
 }
 
 /* Add photo to liked gallery function*/
 function addToLikedGallery() {
-  let currentNum = document.getElementById("image-number").innerHTML;
-  let currentTag = document.getElementById("image-tag").innerHTML;
-  let currentSub = document.getElementById("sub-status").innerHTML;
-  galleryPhotos.push([currentNum, currentTag, currentSub]);
+  if (currentImageNumber == 0) {
+    alert("No image currently available to like!");
+  } else {
+    let currentNum = document.getElementById("image-number").innerHTML;
+    let currentTag = document.getElementById("image-tag").innerHTML;
+    let currentSub = document.getElementById("sub-status").innerHTML;
+    galleryPhotos.push([currentNum, currentTag, currentSub]);
+  }
 }
