@@ -29,7 +29,7 @@ function getRandomImageSub() {
 }
 
 //Functions for getting next and previous images
-function nextImage() {
+function nextImage(searchParameter) {
   if (currentImageNumber < seenImagesListBrowse.length - 1) { //This is to check whether we are revisiting an already passed image number
     currentImageNumber++;
     document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
@@ -37,17 +37,22 @@ function nextImage() {
     document.getElementById("sub-status").innerHTML = seenImagesListBrowse[currentImageNumber][2];
     console.log("Going forward to already cached photo: " + currentImageNumber);
   } else { //Otherwise this is acting as finding new images for us
-    if (userInterests.length >= 1) { //This will be if user has custom interests
-      currentImageNumber += 1;
-      document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
-      let newImageTag = userInterests[getRandomInt(userInterests.length)];
-      document.getElementById("image-tag").innerHTML = newImageTag;
-      let newSubStatus = getRandomImageSub();
-      document.getElementById("sub-status").innerHTML = newSubStatus;
-      console.log("Succesfully grabbed new random interests photo: " + currentImageNumber + " + new tag: " + newImageTag + " + new user: " + newSubStatus);
-      seenImagesListBrowse.push([currentImageNumber, newImageTag, newSubStatus]);
-      console.table(seenImagesListBrowse);
-    } else { //This will be if no user interests have been selected
+    if (searchParameter == "interests") {
+      if (userInterests.length >= 1) { //This will be if user has custom interests
+        currentImageNumber += 1;
+        document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
+        let newImageTag = userInterests[getRandomInt(userInterests.length)];
+        document.getElementById("image-tag").innerHTML = newImageTag;
+        let newSubStatus = getRandomImageSub();
+        document.getElementById("sub-status").innerHTML = newSubStatus;
+        console.log("Succesfully grabbed new random interests photo: " + currentImageNumber + " + new tag: " + newImageTag + " + new user: " + newSubStatus);
+        seenImagesListBrowse.push([currentImageNumber, newImageTag, newSubStatus]);
+        console.table(seenImagesListBrowse);
+      }
+      else {
+        alert("No interests added! Consider adding some before using this feature.");
+      }
+    } else if (searchParameter == "random") { //This will be if no user interests have been selected
       currentImageNumber += 1;
       document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
       let newImageTag = photoTagList[getRandomInt(photoTagList.length)];
@@ -57,9 +62,39 @@ function nextImage() {
       console.log("Successfully grabbed new random non-interests photo: " + currentImageNumber + " + new tag: " + newImageTag + " + new user: " + newSubStatus);
       seenImagesListBrowse.push([currentImageNumber, newImageTag, newSubStatus]);
       console.table(seenImagesListBrowse);
+    } else if (searchParameter == "mixed") {
+      let randomNumber = getRandomInt(2);
+      if (randomNumber == 1) { //Randomly chosen website stuff
+        currentImageNumber += 1;
+        document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
+        let newImageTag = photoTagList[getRandomInt(photoTagList.length)];
+        document.getElementById("image-tag").innerHTML = newImageTag;
+        let newSubStatus = getRandomImageSub();
+        document.getElementById("sub-status").innerHTML = newSubStatus;
+        console.log("Successfully grabbed new random non-interests photo: " + currentImageNumber + " + new tag: " + newImageTag + " + new user: " + newSubStatus);
+        seenImagesListBrowse.push([currentImageNumber, newImageTag, newSubStatus]);
+        console.table(seenImagesListBrowse);
+      } else {
+        if (userInterests.length >= 1) {
+          currentImageNumber += 1;
+          document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
+          let newImageTag = userInterests[getRandomInt(userInterests.length)];
+          document.getElementById("image-tag").innerHTML = newImageTag;
+          let newSubStatus = getRandomImageSub();
+          document.getElementById("sub-status").innerHTML = newSubStatus;
+          console.log("Succesfully grabbed new random interests photo: " + currentImageNumber + " + new tag: " + newImageTag + " + new user: " + newSubStatus);
+          seenImagesListBrowse.push([currentImageNumber, newImageTag, newSubStatus]);
+          console.table(seenImagesListBrowse);
+        } else {
+          alert("No interests added! Consider adding some before using this feature.")
+        }
+      }
+    } else {
+      alert("Please select a filter option.");
     }
   }
 }
+
 /* First number in array seach is index of image number
  * Second number in array search is 0 / 1 / 2
  * 0 == Image Number
@@ -81,9 +116,14 @@ function prevImage() {
 }
 
 /* Function for each selection in timeframe (daily / weekly / monthly) */
-function checkFilterValue() {
-  var ddl = document.getElementById("trending-timeframe");
-  return selectedValue = ddl.options[ddl.selectedIndex].value;
+function checkFilterValueTrending() {
+  var trendValue = document.getElementById("trending-timeframe");
+  return selectedValue = trendValue.options[trendValue.selectedIndex].value;
+}
+
+function checkFilterValueBrowse() {
+  var browseValue = document.getElementById("browse-selection");
+  return selectedValue = browseValue.options[browseValue.selectedIndex].value;
 }
 
 /* Function to grab next trending image and display it */
@@ -109,7 +149,7 @@ function nextImageTrending(searchParameter) {
     if (searchParameter == "daily") {
       if (likedPhotoList.length < 1) {
         for (let i = 20; i >= 0; i--) {
-          let numOfLikes = Math.floor(Math.random() * 100);
+          let numOfLikes = getRandomInt(100);
           likedPhotoList.push(numOfLikes);
           likedPhotoList.sort(function(a, b){return b-a});
         }
@@ -119,7 +159,7 @@ function nextImageTrending(searchParameter) {
     } else if (searchParameter == "weekly") {
       if (likedPhotoList.length < 1) {
         for (let i = 20; i >= 0; i--) {
-          let numOfLikes = Math.floor(Math.random() * 500);
+          let numOfLikes = getRandomInt(500);
           likedPhotoList.push(numOfLikes);
           likedPhotoList.sort(function(a, b){return b-a});
         }
@@ -129,7 +169,7 @@ function nextImageTrending(searchParameter) {
     } else if (searchParameter == "monthly") {
       if (likedPhotoList.length < 1) {
         for (let i = 20; i >= 0; i--) {
-          let numOfLikes = Math.floor(Math.random() * 2000);
+          let numOfLikes = getRandomInt(2000);
           likedPhotoList.push(numOfLikes);
           likedPhotoList.sort(function(a, b){return b-a});
         }
@@ -142,7 +182,7 @@ function nextImageTrending(searchParameter) {
   }
 }
 
-function prevImageTrending(searchParameter) {
+function prevImageTrending() {
   if (currentImageNumber == 0) {
     window.alert("Please click 'NEXT IMAGE' to get started.")
   } else if (currentImageNumber == 1) {
