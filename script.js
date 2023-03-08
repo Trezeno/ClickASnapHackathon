@@ -1,8 +1,10 @@
-let seenImagesList = [["IMAGE NUMBER", "IMAGE TAG", "USER SUB STATUS"]];
+let seenImagesListBrowse = [["IMAGE NUMBER", "IMAGE TAG", "USER SUB STATUS"]];
+let seenImagesListTrending = [["IMAGE NUMBER", "IMAGE TAG", "AMOUNT OF LIKES"]];
 let currentImageNumber = 0;
 let photoTagList = ["FOOTBALL", "SPACE", "FLOWERS", "COMPUTERS", "GAMING", "ANIMALS", "FASHION", "CELEBRITIES", "FOOD", "SCENERY"]
 let userInterestsStarter = "Current user interests: ";
 let userInterests = [];
+let likedPhotoList = [];
 
 //Function that gets and stores user interests
 function getUserInterests() {
@@ -28,11 +30,12 @@ function getRandomImageSub() {
 
 //Functions for getting next and previous images
 function nextImage() {
-  if (currentImageNumber < seenImagesList.length - 1) { //This is to check whether we are revisiting an already passed image number
+  if (currentImageNumber < seenImagesListBrowse.length - 1) { //This is to check whether we are revisiting an already passed image number
     currentImageNumber++;
     document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
-    document.getElementById("image-tag").innerHTML = seenImagesList[currentImageNumber][1];
-    document.getElementById("sub-status").innerHTML = seenImagesList[currentImageNumber][2];
+    document.getElementById("image-tag").innerHTML = seenImagesListBrowse[currentImageNumber][1];
+    document.getElementById("sub-status").innerHTML = seenImagesListBrowse[currentImageNumber][2];
+    console.log("Going forward to already cached photo: " + currentImageNumber);
   } else { //Otherwise this is acting as finding new images for us
     if (userInterests.length >= 1) { //This will be if user has custom interests
       currentImageNumber += 1;
@@ -41,9 +44,9 @@ function nextImage() {
       document.getElementById("image-tag").innerHTML = newImageTag;
       let newSubStatus = getRandomImageSub();
       document.getElementById("sub-status").innerHTML = newSubStatus;
-      console.log("CUSTOM INTERESTS NEXT SUCCESS, new number: " + currentImageNumber + " new tag: " + newImageTag + " new user: " + newSubStatus);
-      seenImagesList.push([currentImageNumber, newImageTag, newSubStatus]);
-      console.table(seenImagesList);
+      console.log("Succesfully grabbed new random interests photo: " + currentImageNumber + " + new tag: " + newImageTag + " + new user: " + newSubStatus);
+      seenImagesListBrowse.push([currentImageNumber, newImageTag, newSubStatus]);
+      console.table(seenImagesListBrowse);
     } else { //This will be if no user interests have been selected
       currentImageNumber += 1;
       document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
@@ -51,16 +54,13 @@ function nextImage() {
       document.getElementById("image-tag").innerHTML = newImageTag;
       let newSubStatus = getRandomImageSub();
       document.getElementById("sub-status").innerHTML = newSubStatus;
-      console.log("NO INTERESTS NEXT SUCCESS, new number: " + currentImageNumber + " new tag: " + newImageTag + " new user: " + newSubStatus);
-      seenImagesList.push([currentImageNumber, newImageTag, newSubStatus]);
-      console.table(seenImagesList);
+      console.log("Successfully grabbed new random non-interests photo: " + currentImageNumber + " + new tag: " + newImageTag + " + new user: " + newSubStatus);
+      seenImagesListBrowse.push([currentImageNumber, newImageTag, newSubStatus]);
+      console.table(seenImagesListBrowse);
     }
   }
 }
-
-
-/* This will need to be updated once saving seen images shown to be able to revert to EXACTLY what was previously shown
- * First number in array seach is index of image number
+/* First number in array seach is index of image number
  * Second number in array search is 0 / 1 / 2
  * 0 == Image Number
  * 1 == Image Tag
@@ -74,8 +74,84 @@ function prevImage() {
   } else {
     currentImageNumber--;
     document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
-    document.getElementById("image-tag").innerHTML = seenImagesList[currentImageNumber][1];
-    document.getElementById("sub-status").innerHTML = seenImagesList[currentImageNumber][2];
+    document.getElementById("image-tag").innerHTML = seenImagesListBrowse[currentImageNumber][1];
+    document.getElementById("sub-status").innerHTML = seenImagesListBrowse[currentImageNumber][2];
+    console.log("Going back to already cached photo: " + currentImageNumber);
   }
 }
 
+/* Function for each selection in timeframe (daily / weekly / monthly) */
+function checkFilterValue() {
+  var ddl = document.getElementById("trending-timeframe");
+  return selectedValue = ddl.options[ddl.selectedIndex].value;
+}
+
+/* Function to grab next trending image and display it */
+function grabTrendingImage() {
+  currentImageNumber += 1;
+  document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
+  let newImageTag = photoTagList[getRandomInt(photoTagList.length)];
+  document.getElementById("image-tag").innerHTML = newImageTag;
+  let numOfLikes = likedPhotoList[currentImageNumber];
+  document.getElementById("likes").innerHTML = "NUMBER OF LIKES: " + numOfLikes;
+  console.log("Successfully grabbed next top trending photo: " + currentImageNumber + " + new tag: " + newImageTag + " + amount of likes: " + numOfLikes);
+  seenImagesListTrending.push([currentImageNumber, newImageTag, numOfLikes]);
+}
+
+function nextImageTrending(searchParameter) {
+  if (currentImageNumber < seenImagesListTrending.length - 1) { //This is to check whether we are revisiting an already passed image number
+    currentImageNumber++;
+    document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
+    document.getElementById("image-tag").innerHTML = seenImagesListTrending[currentImageNumber][1];
+    document.getElementById("likes").innerHTML = "NUMBER OF LIKES: " + seenImagesListTrending[currentImageNumber][2];
+    console.log("Going forward to already cached photo: " + currentImageNumber);
+  } else {
+    if (searchParameter == "daily") {
+      if (likedPhotoList.length < 1) {
+        for (let i = 20; i >= 0; i--) {
+          let numOfLikes = Math.floor(Math.random() * 100);
+          likedPhotoList.push(numOfLikes);
+          likedPhotoList.sort(function(a, b){return b-a});
+        }
+      }
+      grabTrendingImage();
+      console.table(seenImagesListTrending);
+    } else if (searchParameter == "weekly") {
+      if (likedPhotoList.length < 1) {
+        for (let i = 20; i >= 0; i--) {
+          let numOfLikes = Math.floor(Math.random() * 500);
+          likedPhotoList.push(numOfLikes);
+          likedPhotoList.sort(function(a, b){return b-a});
+        }
+      }
+      grabTrendingImage();
+      console.table(seenImagesListTrending);
+    } else if (searchParameter == "monthly") {
+      if (likedPhotoList.length < 1) {
+        for (let i = 20; i >= 0; i--) {
+          let numOfLikes = Math.floor(Math.random() * 2000);
+          likedPhotoList.push(numOfLikes);
+          likedPhotoList.sort(function(a, b){return b-a});
+        }
+      }
+      grabTrendingImage();
+      console.table(seenImagesListTrending);
+    } else {
+      alert("Please select a filter option above.");
+    }
+  }
+}
+
+function prevImageTrending(searchParameter) {
+  if (currentImageNumber == 0) {
+    window.alert("Please click 'NEXT IMAGE' to get started.")
+  } else if (currentImageNumber == 1) {
+    console.log("FAIL, at image number 1")
+  } else {
+    currentImageNumber--;
+    document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
+    document.getElementById("image-tag").innerHTML = seenImagesListTrending[currentImageNumber][1];
+    document.getElementById("likes").innerHTML = "NUMBER OF LIKES: " + seenImagesListTrending[currentImageNumber][2];
+    console.log("Going back to already cached photo: " + currentImageNumber);
+  }
+}

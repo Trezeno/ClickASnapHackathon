@@ -82,8 +82,13 @@ button#next-image-button {
   margin-left: 263px;
 }
 
+button#next-image-button-trending {
+  margin-left: 263px;
+}
+
 button:hover {
   background-color: rgb(240,240,240);
   color: black;
   cursor: pointer;
 }
+

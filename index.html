@@ -16,7 +16,7 @@
   <div class="nav-bar">
     <ul>
       <li><a class="active" href="index.html">BROWSE</a></li>
-      <!-- <li><a href="trending.html">TRENDING</a></li> -->
+      <li><a href="trending.html">TRENDING</a></li>
     </ul>
   </div>
 
@@ -25,6 +25,14 @@
       CELEBRITIES, FOOD, SCENERY</h3>
     <h3 id="interests">Current user interests: NONE</h3>
     <button onclick="getUserInterests()" id="user-interests-button" type="button">ADD INTEREST</button>
+    <h3>Filter search:    
+      <select name="browse-selection" id="browse-selection">
+      <option value="selectcard">--- Please Select ---</option>
+      <option value="daily">Website Randomizer</option>
+      <option value="weekly">My Interests Only</option>
+      <option value="monthly">Mix Of Both</option>
+    </select></h3>
+  </div>
   </div>
 
   <div class="showimage">
