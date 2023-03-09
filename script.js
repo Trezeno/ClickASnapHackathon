@@ -7,6 +7,7 @@ let userInterests = [];
 let likedPhotoList = [];
 let galleryPhotos = [["GALLERY IMAGE NUMBER", "GALLERY IMAGE TAG", "GALLERY USER SUB STATUS"]];
 let galleryPhotoIndex = 0;
+let deletedInterests = [];
 
 //Function that gets and stores user interests 
 function getUserInterests() {
@@ -25,6 +26,7 @@ function delUserInterests() {
   let delInterest = prompt("Please type which interest you would like to delete: ").toUpperCase();
   if (userInterests.includes(delInterest)) {
     let delIndex = userInterests.indexOf(delInterest);
+    deletedInterests.push(delInterest);
     if (delIndex > -1) { // Only splice array when item is found
       userInterests.splice(delIndex, 1); // 2nd parameter means remove one item only
     }
@@ -275,7 +277,7 @@ function addToLikedGallery() {
       for (let photo in galleryPhotos) {
         if (photoTagList[interest] == galleryPhotos[photo][1]) {
           sumOfTags++;
-          if (sumOfTags == 5) {
+          if (sumOfTags == 5 && !deletedInterests.includes(photoTagList[interest])) {
             userInterests.push(photoTagList[interest]);
             console.log("AI added user interest: " + photoTagList[interest]);
             let lengthOfList = userInterests.length;
