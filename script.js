@@ -267,7 +267,17 @@ function addToLikedGallery() {
     let currentNum = document.getElementById("image-number").innerHTML;
     let currentTag = document.getElementById("image-tag").innerHTML;
     let currentSub = document.getElementById("sub-status").innerHTML;
-    galleryPhotos.push([currentNum, currentTag, currentSub]);
+    let imageArray = [currentNum, currentTag, currentSub];
+    galleryPhotos.push(imageArray);
+    console.log("Photo added to liked photos gallery.");
+    let sumOfTags = 0;
+    for (let interest in photoTagList) {
+      for (let photo in galleryPhotos) {
+        if (photoTagList[interest] == galleryPhotos[photo][1]) {
+          sumOfTags++; //CONTINUE HERE
+        }
+      }
+    }
   }
 }
 
