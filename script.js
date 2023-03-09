@@ -274,7 +274,16 @@ function addToLikedGallery() {
     for (let interest in photoTagList) {
       for (let photo in galleryPhotos) {
         if (photoTagList[interest] == galleryPhotos[photo][1]) {
-          sumOfTags++; //CONTINUE HERE
+          sumOfTags++;
+          if (sumOfTags == 5) {
+            userInterests.push(photoTagList[interest]);
+            console.log("AI added user interest: " + photoTagList[interest]);
+            let lengthOfList = userInterests.length;
+            if (userInterests[lengthOfList - 2] == userInterests[lengthOfList - 1]) {
+              userInterests.pop();
+            }
+            document.getElementById("interests").innerHTML = userInterestsStarter + userInterests.join(", ");
+          }
         }
       }
     }
