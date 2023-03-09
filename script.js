@@ -8,11 +8,34 @@ let likedPhotoList = [];
 let galleryPhotos = [["GALLERY IMAGE NUMBER", "GALLERY IMAGE TAG", "GALLERY USER SUB STATUS"]];
 let galleryPhotoIndex = 0;
 
-//Function that gets and stores user interests
+//Function that gets and stores user interests 
 function getUserInterests() {
-  userInterests.push(prompt("Enter one of your interests: ").toUpperCase());
-  console.log("Updated user interests: " + userInterests);
-  document.getElementById("interests").innerHTML = userInterestsStarter + userInterests.join(", ");
+  let insertInterest = prompt("Enter one of your interests: ").toUpperCase();
+  if (typeof insertInterest == "string" && insertInterest.length >= 1) { //Don't know how to fix this part but you get the idea of what I am trying to do
+    userInterests.push(insertInterest);
+    console.log("Updated user interests: " + userInterests);
+    document.getElementById("interests").innerHTML = userInterestsStarter + userInterests.join(", "); 
+  } else {
+    alert("Invalid entry. Please use alphabetical characters only.");
+  }
+}
+
+//Function that deletes stored user interests
+function delUserInterests() {
+  let delInterest = prompt("Please type which interest you would like to delete: ").toUpperCase();
+  if (userInterests.includes(delInterest)) {
+    let delIndex = userInterests.indexOf(delInterest);
+    if (delIndex > -1) { // Only splice array when item is found
+      userInterests.splice(delIndex, 1); // 2nd parameter means remove one item only
+    }
+    if (userInterests.length >= 1) {
+      document.getElementById("interests").innerHTML = userInterestsStarter + userInterests.join(", ");
+    } else {
+      document.getElementById("interests").innerHTML = userInterestsStarter + "NONE";
+    }
+  } else {
+    alert("Invalid entry. Either no interests to delete, or a mistype.");
+  }
 }
 
 //Function that will choose a random index within an array (using for photoTagList and userInterests)
@@ -105,9 +128,9 @@ function nextImage(searchParameter) {
  */
 function prevImage() {
   if (currentImageNumber == 0) {
-    window.alert("Please click 'NEXT IMAGE' to get started.")
+    window.alert("Please click 'NEXT IMAGE' to get started.");
   } else if (currentImageNumber == 1) {
-    console.log("FAIL, at image number 1")
+    alert("Already at image number ONE.");
   } else {
     currentImageNumber--;
     document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
@@ -131,13 +154,17 @@ function checkFilterValueBrowse() {
 /* Function to grab next trending image and display it */
 function grabTrendingImage() {
   currentImageNumber += 1;
-  document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
-  let newImageTag = photoTagList[getRandomInt(photoTagList.length)];
-  document.getElementById("image-tag").innerHTML = newImageTag;
-  let numOfLikes = likedPhotoList[currentImageNumber];
-  document.getElementById("likes").innerHTML = "NUMBER OF LIKES: " + numOfLikes;
-  console.log("Successfully grabbed next top trending photo: " + currentImageNumber + " + new tag: " + newImageTag + " + amount of likes: " + numOfLikes);
-  seenImagesListTrending.push([currentImageNumber, newImageTag, numOfLikes]);
+  if (currentImageNumber <= 20) {
+    document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
+    let newImageTag = photoTagList[getRandomInt(photoTagList.length)];
+    document.getElementById("image-tag").innerHTML = newImageTag;
+    let numOfLikes = likedPhotoList[currentImageNumber];
+    document.getElementById("likes").innerHTML = "NUMBER OF LIKES: " + numOfLikes;
+    console.log("Successfully grabbed next top trending photo: " + currentImageNumber + " + new tag: " + newImageTag + " + amount of likes: " + numOfLikes);
+    seenImagesListTrending.push([currentImageNumber, newImageTag, numOfLikes]);
+  } else {
+    alert("Reached end of photos for now.");
+  }
 }
 
 function nextImageTrending(searchParameter) {
@@ -188,7 +215,7 @@ function prevImageTrending() {
   if (currentImageNumber == 0) {
     window.alert("Please click 'NEXT IMAGE' to get started.")
   } else if (currentImageNumber == 1) {
-    console.log("FAIL, at image number 1")
+    alert("Already at image number ONE.")
   } else {
     currentImageNumber--;
     document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
@@ -222,7 +249,7 @@ function galleryPrev() {
   if (galleryPhotoIndex == 0) {
     alert("Please click 'NEXT IMAGE' to get started.")
   } else if (galleryPhotoIndex == 1) {
-    console.log("FAIL, at image number 1");
+    alert("Already at image number ONE of liked gallery.");
   } else {
     galleryPhotoIndex--;
     document.getElementById("image-number-gallery").innerHTML = galleryPhotos[galleryPhotoIndex][0];
@@ -241,5 +268,24 @@ function addToLikedGallery() {
     let currentTag = document.getElementById("image-tag").innerHTML;
     let currentSub = document.getElementById("sub-status").innerHTML;
     galleryPhotos.push([currentNum, currentTag, currentSub]);
+  }
+}
+
+/* Function to add 1 like to trending photo */ 
+function addLikeToTrendingPhoto() {
+  let numOfLikes = document.getElementById("likes").innerHTML;
+  let lastNumberStr = numOfLikes.charAt(numOfLikes.length -1);
+  let secondLastNumberStr = numOfLikes.charAt(numOfLikes.length -2);
+  let lastNumberInt = parseInt(lastNumberStr);
+  if (lastNumberInt == 9 && secondLastNumberStr != " ") {
+    secondLastNumberInt = parseInt(secondLastNumberStr);
+    lastNumberInt = 0;
+    secondLastNumberInt += 1;
+    let numOfLikesUpdated = numOfLikes.substring(0, numOfLikes.length-2) + secondLastNumberInt + lastNumberInt;
+    document.getElementById("likes").innerHTML = numOfLikesUpdated;
+  } else {
+    lastNumberStr = String(lastNumberInt += 1);
+    let numOfLikesUpdated = numOfLikes.substring(0, numOfLikes.length-1) + lastNumberStr;
+    document.getElementById("likes").innerHTML = numOfLikesUpdated;
   }
 }
