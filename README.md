@@ -1,4 +1,4 @@
-# Bournemouth University ClickASnap Hackathon
+# Bournemouth University ClickASnap Hackathon March 2023
 
 _6th March 2023 -> 10th March 2023_
 
