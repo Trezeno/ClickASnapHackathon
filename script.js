@@ -58,20 +58,12 @@ function nextImage() {
   }
 }
 
-
-/* This will need to be updated once saving seen images shown to be able to revert to EXACTLY what was previously shown
- * First number in array seach is index of image number
- * Second number in array search is 0 / 1 / 2
- * 0 == Image Number
- * 1 == Image Tag
- * 2 == User Sub Status
- */
 function prevImage() {
   if (currentImageNumber == 0) {
-    window.alert("Please click 'NEXT IMAGE' to get started.")
-  } else if (currentImageNumber == 1) {
+    window.alert("Please click 'NEXT IMAGE' to get started.") //To catch negative indexing if no photos are yet generated in the array
+  } else if (currentImageNumber == 1) { //To show you are at image number one of the generated array
     console.log("FAIL, at image number 1")
-  } else {
+  } else { //Must be above number one so must be able to go back to previous image
     currentImageNumber--;
     document.getElementById("image-number").innerHTML = "IMAGE " + currentImageNumber;
     document.getElementById("image-tag").innerHTML = seenImagesList[currentImageNumber][1];
